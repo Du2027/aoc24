@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include <sys/types.h>
 
 int main(int argc, char** argv){
     FILE* file = fopen("input.txt", "r");
@@ -18,7 +17,7 @@ int main(int argc, char** argv){
         next = line[0];
         while (next == 32 || next <= '9' && next >= '0') {
             buffer[0] = line[level_iteration];
-            buffer[1] = line[level_iteration + 1];
+            if(buffer[1] != 32){buffer[1] = line[level_iteration + 1];}
             levels[iteration][level_array_iteration] = atoi(buffer);
             level_iteration += 3;
             level_array_iteration++;
@@ -57,13 +56,14 @@ int main(int argc, char** argv){
                 break;
             }
             if(levels[i][iteration] < levels[i][iteration +1] && bigger == -1){
-
+                printf("%d < %d\n", levels[i][iteration], levels[i][iteration +1]);
             }
             else if(levels[i][iteration] > levels[i][iteration +1] && bigger == 1){
-
+                printf("%d > %d\n", levels[i][iteration], levels[i][iteration +1]);
             }
             else {
                 contin = false;
+                printf("WRONG - %d, %d\n", levels[i][iteration], levels[i][iteration +1]);
             }
         }
         if (contin == true) {
